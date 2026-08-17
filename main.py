@@ -2,17 +2,8 @@ import pandas as pd
 import deepchem as dc
 from rdkit import rd
 
-# This loads the standardized BACE dataset through DeepChem
-tasks, datasets, transformers = dc.molnet.load_bace_regression(
-    featurizer="Raw",
-    splitter=None,
-    transformers=[]
-)
-
-print("DeepChem BACE dataset loaded successfully.")
-
 # Convert into df dataframe
-df = pd.DataFrame(datasets)
+df = pd.read_csv('bace')
 
 print(f"Original dataset size: {df.shape}")
 
