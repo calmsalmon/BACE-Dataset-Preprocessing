@@ -1,9 +1,8 @@
 import pandas as pd
-import deepchem as dc
-from rdkit import rd
+from rdkit import Chem
 
 # Convert into df dataframe
-df = pd.read_csv('bace')
+df = pd.read_csv('bace.csv')
 
 print(f"Original dataset size: {df.shape}")
 
@@ -18,14 +17,14 @@ df = df.dropna(subset=required_columns)
 # Validate and canonicalize SMILES
 def canonicalize_smiles(smiles):
 
-    molecule = rd.MolFromSmiles(str(smiles))
+    molecule = Chem.MolFromSmiles(str(smiles))
 
     # Invalid molecule
     if molecule is None:
         return None
 
     # Convert to standardized/canonical SMILES
-    return rd.MolToSmiles(
+    return Chem.MolToSmiles(
         molecule,
         canonical=True
     )
